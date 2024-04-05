@@ -1,4 +1,4 @@
-package edu.tacoma.uw.barber_mobile_application.ui.home;
+package edu.tacoma.uw.barber_mobile_application.ui.details;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.tacoma.uw.barber_mobile_application.databinding.FragmentHomeBinding;
+import edu.tacoma.uw.barber_mobile_application.databinding.FragmentDetailsBinding;
 
-public class HomeFragment extends Fragment {
+public class DetailsFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentDetailsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        DetailsViewModel detailsViewModel =
+                new ViewModelProvider(this).get(DetailsViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textDetails;
+        detailsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

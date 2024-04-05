@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_services">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="edu.tacoma.uw.barber_mobile_application.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_services"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.services.ServicesFragment"
+        android:label="@string/title_services"
+        tools:layout="@layout/fragment_services" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="edu.tacoma.uw.barber_mobile_application.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_portfolio"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.portfolio.PortfolioFragment"
+        android:label="@string/title_portfolio"
+        tools:layout="@layout/fragment_portfolio" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="edu.tacoma.uw.barber_mobile_application.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_details"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.details.DetailsFragment"
+        android:label="@string/title_details"
+        tools:layout="@layout/fragment_details" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>

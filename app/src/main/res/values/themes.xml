@@ -13,4 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.RemoveSplashScreenTheme" parent="@style/Theme.Barber_Mobile_Application">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

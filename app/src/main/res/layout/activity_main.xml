@@ -13,7 +13,7 @@
         android:layout_height="59dp"
         android:background="#202020"
         app:itemIconTint="@drawable/bottom_nav_color_selector"
-        app:itemTextColor="@color/white"
+        app:itemTextColor="@color/MainGold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"

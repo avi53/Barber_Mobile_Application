@@ -24,8 +24,8 @@ public class PortfolioFragment extends Fragment {
         binding = FragmentPortfolioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textPortfolio;
-        portfolioViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        final TextView textView = binding.textPortfolio;
+//        portfolioViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

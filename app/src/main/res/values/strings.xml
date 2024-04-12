@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Barber_Mobile_Application</string>
+    <string name="app_name">The Empire Barbershop</string>
     <string name="title_services">Services</string>
     <string name="title_portfolio">Portfolio</string>
     <string name="title_details">Shop Details</string>
     <string name="title_account">Account</string>
+    <string name="MAPS_API_KEY">AIzaSyBY_xsZ3ngBLpO1UDAryf-6NivQk0MwXzY</string>
 </resources>

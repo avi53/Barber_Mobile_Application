@@ -45,6 +45,8 @@ public class DetailsFragment extends Fragment {
                 if (location != null) {
                     mMap.addMarker(new MarkerOptions().position(location).title("The Empire Barbershop"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
                 }
             }
         });

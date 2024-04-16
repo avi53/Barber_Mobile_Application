@@ -19,8 +19,9 @@
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="411dp"
+                android:layout_height="422dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/q"
                 app:layout_constraintBottom_toTopOf="@+id/imageView7"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +32,9 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="411dp"
+                android:layout_height="419dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/l"
                 app:layout_constraintBottom_toTopOf="@+id/imageView6"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,10 +1,12 @@
 package edu.tacoma.uw.barber_mobile_application.ui.details;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
@@ -59,13 +61,16 @@ public class DetailsFragment extends Fragment {
         instagramButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Instagram was clicked", Toast.LENGTH_SHORT).show();
-            }
+                Uri uriUrl = Uri.parse("https://www.instagram.com/theempirebarbershop/");
+                Intent webView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(webView);            }
         });
         facebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Facebook was clicked", Toast.LENGTH_SHORT).show();
+                Uri uriUrl = Uri.parse("https://www.facebook.com/TheEmpireBarbershop/");
+                Intent webView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(webView);
             }
         });
 

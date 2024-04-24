@@ -27,41 +27,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone Number: +1(253) 344-1487"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email: whateverHomiesEmailIs@gmail.com"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Instagram icon with link to IG page"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Facebook icon with link to FB page"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="Business Hours:"
-                android:textSize="18sp"
-                android:paddingBottom="8dp"
+                android:textSize="22sp"
                 android:textColor="@color/white"/>
 
             <TextView
@@ -69,14 +36,14 @@
                 android:layout_height="wrap_content"
                 android:text="Monday - Saturday:                    11AM - 2PM\n                                                          3PM - 6PM\nSunday:                                         12PM - 5PM"
                 android:textSize="18sp"
-                android:paddingBottom="8dp"
+                android:paddingBottom="15dp"
                 android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Business Amenities:"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/white"/>
 
@@ -84,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Parking Space"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/white"/>
 
@@ -92,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Accessible for people with disabilities"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/white"/>
 
@@ -100,9 +67,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Child friendly"
+                android:textSize="15sp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact Information:"
+                android:textSize="22sp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+1(253) 344-1487"
                 android:textSize="18sp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="theempirebarbershop@gmail.com"
+                android:textSize="18sp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Business Socials:"
+                android:textSize="22sp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/white"/>
+
+            <ImageButton
+                android:id="@+id/details_instagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_instagram"
+                android:contentDescription="@string/title_instagram"
+                android:background="@null"
+
+                android:layout_marginBottom="8dp"/>
+
+            <ImageButton
+                android:id="@+id/details_facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_facebook"
+                android:contentDescription="@string/title_facebook"
+                android:background="@null"
+
+                android:layout_marginBottom="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"

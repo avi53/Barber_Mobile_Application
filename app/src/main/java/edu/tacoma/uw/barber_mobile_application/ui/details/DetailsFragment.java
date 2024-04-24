@@ -12,6 +12,9 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -47,6 +50,24 @@ public class DetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
+
+        // Image buttons for social media links
+        ImageButton instagramButton = view.findViewById(R.id.details_instagram);
+        ImageButton facebookButton = view.findViewById(R.id.details_facebook);
+
+        // onClick listeners for when either image button is clicked
+        instagramButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Instagram was clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        facebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Facebook was clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Sets up necessary values for encryption/decryption of API Key
         initializeCipher();
@@ -216,4 +237,5 @@ public class DetailsFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
 }

@@ -25,6 +25,7 @@ public class ServicesFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textServices;
+
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }

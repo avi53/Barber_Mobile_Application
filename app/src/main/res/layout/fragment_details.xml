@@ -82,10 +82,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+1(253) 344-1487"
-                android:textSize="18sp"
                 android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
+                android:text="+1(253) 344-1487"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -103,25 +103,30 @@
                 android:paddingBottom="8dp"
                 android:textColor="@color/white"/>
 
-            <ImageButton
-                android:id="@+id/details_instagram"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_instagram"
-                android:contentDescription="@string/title_instagram"
-                android:background="@null"
+                android:gravity="center_horizontal">
 
-                android:layout_marginBottom="8dp"/>
+                <ImageButton
+                    android:id="@+id/details_instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_instagram"
+                    android:contentDescription="@string/title_instagram"
+                    android:background="@null"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="35dp"/>
 
-            <ImageButton
-                android:id="@+id/details_facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_facebook"
-                android:contentDescription="@string/title_facebook"
-                android:background="@null"
-
-                android:layout_marginBottom="15dp"/>
+                <ImageButton
+                    android:id="@+id/details_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_facebook"
+                    android:contentDescription="@string/title_facebook"
+                    android:background="@null"
+                    android:layout_marginBottom="15dp"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

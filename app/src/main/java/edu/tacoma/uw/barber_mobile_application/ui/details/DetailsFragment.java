@@ -40,6 +40,8 @@ import edu.tacoma.uw.barber_mobile_application.databinding.FragmentDetailsBindin
 
 public class DetailsFragment extends Fragment {
 
+    private static final String KEY_MAPS_API_KEY = "maps_api_key";
+    private String mMapsApiKey;
     private GoogleMap mMap;
     private SharedPreferences sharedPreferences;
     private Cipher cipher;
@@ -56,6 +58,11 @@ public class DetailsFragment extends Fragment {
         // Image buttons for social media links
         ImageButton instagramButton = view.findViewById(R.id.details_instagram);
         ImageButton facebookButton = view.findViewById(R.id.details_facebook);
+
+        // Restore saved state if available
+        if (savedInstanceState != null) {
+            mMapsApiKey = savedInstanceState.getString(KEY_MAPS_API_KEY);
+        }
 
         // onClick listeners for when either image button is clicked
         instagramButton.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +128,11 @@ public class DetailsFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_MAPS_API_KEY, mMapsApiKey);
+    }
 
     // All Private Helper Methods
 

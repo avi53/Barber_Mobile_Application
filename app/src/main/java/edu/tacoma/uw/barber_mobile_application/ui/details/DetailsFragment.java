@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,6 +59,7 @@ public class DetailsFragment extends Fragment {
         // Image buttons for social media links
         ImageButton instagramButton = view.findViewById(R.id.details_instagram);
         ImageButton facebookButton = view.findViewById(R.id.details_facebook);
+        TextView policyButton = view.findViewById(R.id.details_policy);
 
         // Restore saved state if available
         if (savedInstanceState != null) {
@@ -78,6 +80,13 @@ public class DetailsFragment extends Fragment {
                 Uri uriUrl = Uri.parse("https://www.facebook.com/TheEmpireBarbershop/");
                 Intent webView = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(webView);
+            }
+        });
+        policyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "NEED TO SEND TO NEW POLICY/CANCELLATION ACTIVITY", Toast.LENGTH_SHORT).show();
+
             }
         });
 

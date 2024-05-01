@@ -25,7 +25,11 @@
         android:id="@+id/navigation_details"
         android:name="edu.tacoma.uw.barber_mobile_application.ui.details.DetailsFragment"
         android:label="@string/title_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_navigation_details_to_aboutFragment2"
+            app:destination="@id/aboutFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"
@@ -46,4 +50,9 @@
         android:name="edu.tacoma.uw.barber_mobile_application.ui.services.BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" />
+    <fragment
+        android:id="@+id/aboutFragment2"
+        android:name="edu.tacoma.uw.barber_mobile_application.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

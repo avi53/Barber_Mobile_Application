@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -60,6 +62,7 @@ public class DetailsFragment extends Fragment {
         ImageButton instagramButton = view.findViewById(R.id.details_instagram);
         ImageButton facebookButton = view.findViewById(R.id.details_facebook);
         TextView policyButton = view.findViewById(R.id.details_policy);
+        TextView aboutButton = view.findViewById(R.id.details_about);
 
         // Restore saved state if available
         if (savedInstanceState != null) {
@@ -86,7 +89,13 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "NEED TO SEND TO NEW POLICY/CANCELLATION ACTIVITY", Toast.LENGTH_SHORT).show();
-
+            }
+        });
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_navigation_details_to_aboutFragment2);
             }
         });
 

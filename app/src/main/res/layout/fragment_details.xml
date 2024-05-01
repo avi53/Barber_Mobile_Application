@@ -21,15 +21,17 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-
                 android:layout_marginBottom="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/editTextBackground"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:text="Business Hours:"
                 android:textSize="22sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -42,10 +44,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/editTextBackground"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:text="Business Amenities:"
                 android:textSize="22sp"
                 android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -74,15 +79,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/editTextBackground"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:text="Contact Information:"
                 android:textSize="22sp"
                 android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
+                android:autoLink="phone"
+                android:linksClickable="true"
                 android:text="+1(253) 344-1487"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
@@ -91,6 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="theempirebarbershop@gmail.com"
+                android:autoLink="email"
+                android:linksClickable="true"
                 android:textSize="18sp"
                 android:paddingBottom="15dp"
                 android:textColor="@color/white"/>
@@ -98,10 +110,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/editTextBackground"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:text="Business Socials:"
                 android:textSize="22sp"
                 android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,12 +144,13 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/details_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Payment and Cancellation policy tab"
+                android:text="@string/policy"
                 android:textSize="18sp"
                 android:paddingBottom="8dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/teal_200"/>
 
         </LinearLayout>
     </ScrollView>

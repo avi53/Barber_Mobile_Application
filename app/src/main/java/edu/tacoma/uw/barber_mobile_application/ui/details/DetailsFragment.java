@@ -1,10 +1,12 @@
 package edu.tacoma.uw.barber_mobile_application.ui.details;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +41,8 @@ import edu.tacoma.uw.barber_mobile_application.databinding.FragmentDetailsBindin
 
 public class DetailsFragment extends Fragment {
 
+    private static final String KEY_MAPS_API_KEY = "maps_api_key";
+    private String mMapsApiKey;
     private GoogleMap mMap;
     private SharedPreferences sharedPreferences;
     private Cipher cipher;
@@ -54,18 +59,34 @@ public class DetailsFragment extends Fragment {
         // Image buttons for social media links
         ImageButton instagramButton = view.findViewById(R.id.details_instagram);
         ImageButton facebookButton = view.findViewById(R.id.details_facebook);
+        TextView policyButton = view.findViewById(R.id.details_policy);
+
+        // Restore saved state if available
+        if (savedInstanceState != null) {
+            mMapsApiKey = savedInstanceState.getString(KEY_MAPS_API_KEY);
+        }
 
         // onClick listeners for when either image button is clicked
         instagramButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Instagram was clicked", Toast.LENGTH_SHORT).show();
-            }
+                Uri uriUrl = Uri.parse("https://www.instagram.com/theempirebarbershop/");
+                Intent webView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(webView);            }
         });
         facebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Facebook was clicked", Toast.LENGTH_SHORT).show();
+                Uri uriUrl = Uri.parse("https://www.facebook.com/TheEmpireBarbershop/");
+                Intent webView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(webView);
+            }
+        });
+        policyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "NEED TO SEND TO NEW POLICY/CANCELLATION ACTIVITY", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -116,6 +137,11 @@ public class DetailsFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_MAPS_API_KEY, mMapsApiKey);
+    }
 
     // All Private Helper Methods
 

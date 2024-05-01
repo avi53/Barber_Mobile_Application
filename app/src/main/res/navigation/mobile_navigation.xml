@@ -9,7 +9,11 @@
         android:id="@+id/navigation_services"
         android:name="edu.tacoma.uw.barber_mobile_application.ui.services.ServicesFragment"
         android:label="@string/title_services"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_services" >
+        <action
+            android:id="@+id/action_navigation_services_to_optionsFragment"
+            app:destination="@id/optionsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_portfolio"
@@ -28,4 +32,18 @@
         android:name="edu.tacoma.uw.barber_mobile_application.ui.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.OptionsFragment"
+        android:label="fragment_options"
+        tools:layout="@layout/fragment_options" >
+        <action
+            android:id="@+id/action_optionsFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" />
 </navigation>

@@ -8,4 +8,16 @@
     <string name="title_instagram">Instagram</string>
     <string name="title_facebook">Facebook</string>
     <string name="policy"><u>Payment and Cancellation Policy</u></string>
+
+
+    <string name="Haircut50">$50 - Haircut</string>
+    <string name="Haircut25">$25 - Beard</string>
+    <string name="Haircut35">$35 - Taper</string>
+    <string name="Haircut20">$20 - Lineup</string>
+    <string name="Haircut40">$40 - Child</string>
+    <string name="Haircut15">$15 - Senior</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

@@ -8,7 +8,7 @@
     tools:context=".BookFragment" >
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/bookButton"
         android:layout_width="188dp"
         android:layout_height="63dp"
         android:text="Book"
@@ -22,8 +22,9 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="360dp"
-        android:layout_height="301dp"
+        android:layout_width="347dp"
+        android:layout_height="312dp"
+        android:background="#BFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"

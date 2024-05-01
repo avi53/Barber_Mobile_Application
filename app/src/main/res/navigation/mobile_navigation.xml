@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/optionsFragment"
-        android:name="edu.tacoma.uw.barber_mobile_application.OptionsFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.services.OptionsFragment"
         android:label="fragment_options"
         tools:layout="@layout/fragment_options" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookFragment"
-        android:name="edu.tacoma.uw.barber_mobile_application.BookFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.services.BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" />
 </navigation>

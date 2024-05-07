@@ -39,8 +39,8 @@
     <fragment
         android:id="@+id/optionsFragment"
         android:name="edu.tacoma.uw.barber_mobile_application.ui.services.OptionsFragment"
-        android:label="fragment_options"
-        tools:layout="@layout/fragment_options" >
+        android:label="Extra Options"
+        tools:layout="@layout/fragment_options">
         <action
             android:id="@+id/action_optionsFragment_to_bookFragment"
             app:destination="@id/bookFragment" />
@@ -48,11 +48,11 @@
     <fragment
         android:id="@+id/bookFragment"
         android:name="edu.tacoma.uw.barber_mobile_application.ui.services.BookFragment"
-        android:label="fragment_book"
+        android:label="Booking"
         tools:layout="@layout/fragment_book" />
     <fragment
         android:id="@+id/aboutFragment2"
         android:name="edu.tacoma.uw.barber_mobile_application.AboutFragment"
-        android:label="fragment_about"
+        android:label="About "
         tools:layout="@layout/fragment_about" />
 </navigation>

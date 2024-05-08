@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_services">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/navigation_services"
@@ -57,10 +57,15 @@
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.LoginFragment"
-        android:label="LoginFragment" />
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_services"
+            app:destination="@id/navigation_services" />
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.RegistrationFragment"
-        android:label="RegistrationFragment" />
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.RegistrationFragment" />
 </navigation>

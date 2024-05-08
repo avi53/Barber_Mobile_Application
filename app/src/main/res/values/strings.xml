@@ -18,6 +18,17 @@
     <string name="Haircut15">$15 - Senior</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="pwd_hint">Enter your password</string>
+    <string name="register_text">Register</string>
+    <string name="login_text">Login</string>
+    <string name="first_name_hint_register">Enter your First Name</string>
+    <string name="last_name_hint_register">Enter your Last Name</string>
+    <string name="email_hint_register">Enter your Email</string>
+    <string name="pwd_hint_register">Enter a password</string>
+    <string name="pwd_check_hint_register">Re-Type your password</string>
+    <string name="phone_num_hint_register">Enter your phone number</string>
+    <string name="want_to_register_text">Click here to Register</string>
 
 
 </resources>

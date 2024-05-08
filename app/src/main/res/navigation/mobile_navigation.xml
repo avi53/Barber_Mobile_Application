@@ -52,7 +52,15 @@
         tools:layout="@layout/fragment_book" />
     <fragment
         android:id="@+id/aboutFragment2"
-        android:name="edu.tacoma.uw.barber_mobile_application.AboutFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.details.AboutFragment"
         android:label="About "
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.account.RegistrationFragment"
+        android:label="RegistrationFragment" />
 </navigation>

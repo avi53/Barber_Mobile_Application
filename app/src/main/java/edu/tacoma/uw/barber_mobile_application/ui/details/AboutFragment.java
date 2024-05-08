@@ -1,4 +1,4 @@
-package edu.tacoma.uw.barber_mobile_application;
+package edu.tacoma.uw.barber_mobile_application.ui.details;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import edu.tacoma.uw.barber_mobile_application.R;
 
 /**
  * A simple {@link Fragment} subclass.

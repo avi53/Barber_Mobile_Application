@@ -1,6 +1,7 @@
 package edu.tacoma.uw.barber_mobile_application;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,6 +33,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // Observe the current destination of the NavController
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            // Check if the current destination is the LoginFragment
+            // TODO: Add "|| destination.getId() == R.id.registrationFragment" in if block when time comes
+            if (destination.getId() == R.id.loginFragment) {
+                // Hide the BottomNavigationView
+                navView.setVisibility(View.GONE);
+            } else {
+                // Show the BottomNavigationView for other destinations
+                navView.setVisibility(View.VISIBLE);
+            }
+        });
+
+
     }
 
 

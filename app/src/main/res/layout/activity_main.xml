@@ -8,7 +8,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="#202020"
         app:itemIconTint="@drawable/bottom_nav_color_selector"

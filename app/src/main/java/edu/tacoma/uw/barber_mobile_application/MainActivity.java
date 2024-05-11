@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // Observe the current destination of the NavController
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             // Check if the current destination is the LoginFragment
-            // TODO: Add "|| destination.getId() == R.id.registrationFragment" in if block when time comes
-            if (destination.getId() == R.id.loginFragment) {
+            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
                 // Hide the BottomNavigationView
                 navView.setVisibility(View.GONE);
             } else {

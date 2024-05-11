@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textError" />
+        app:layout_constraintTop_toBottomOf="@+id/textErrorRegistration" />
 
     <EditText
         android:id="@+id/pwd_edit_register"
@@ -63,7 +63,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="@string/phone_num_hint_register"
-        android:inputType="number|phone"
+        android:inputType="number"
         android:textColor="@color/white"
         android:textColorHint="#C1C1C1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pwd_edit_register" />
 
     <TextView
-        android:id="@+id/textError"
+        android:id="@+id/textErrorRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"

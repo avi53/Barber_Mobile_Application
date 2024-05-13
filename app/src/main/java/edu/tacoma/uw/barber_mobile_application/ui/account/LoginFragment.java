@@ -1,5 +1,8 @@
 package edu.tacoma.uw.barber_mobile_application.ui.account;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,6 +32,10 @@ import edu.tacoma.uw.barber_mobile_application.databinding.FragmentLoginBinding;
  */
 public class LoginFragment extends Fragment {
 
+    // Define a constant for your SharedPreferences key
+    private static final String SHARED_PREFS = "sharedPrefs";
+    private static final String IS_LOGGED_IN = "isLoggedIn";
+
     private FragmentLoginBinding mBinding;
     private UserViewModel mUserViewModel;
 
@@ -55,6 +62,15 @@ public class LoginFragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
+        }
+
+        // Check if the user is already logged in
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean(IS_LOGGED_IN, false);
+
+        if (isLoggedIn) {
+            Navigation.findNavController(requireView()).navigate(R.id.navigation_services);
+            return;
         }
 
         mBinding.textErrorLogin.setText("");
@@ -99,6 +115,13 @@ public class LoginFragment extends Fragment {
         }
         Log.i(TAG, email);
         mUserViewModel.authenticateClient(account);
+
+        // After successful login, save the login state using SharedPreferences
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(IS_LOGGED_IN, true);
+        editor.apply();
+
     }
 
     private void observeResponse(final JSONObject response) {
@@ -137,5 +160,18 @@ public class LoginFragment extends Fragment {
             Log.d("JSON Response", "No Response");
         }
     }
+
+    // Define a method to clear the login state
+    public void clearLoginState() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //clearing data and making flag false
+        editor.clear();
+        editor.putBoolean(IS_LOGGED_IN, false);
+        editor.apply();
+
+    }
+
+
 
 }

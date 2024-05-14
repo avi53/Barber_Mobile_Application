@@ -2,6 +2,9 @@ package edu.tacoma.uw.barber_mobile_application.ui.account;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,10 +22,14 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import edu.tacoma.uw.barber_mobile_application.R;
+import edu.tacoma.uw.barber_mobile_application.SplashActivity;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
 
+    // Define a constant for your SharedPreferences key
+    private static final String SHARED_PREFS = "sharedPrefs";
+    private static final String IS_LOGGED_IN = "isLoggedIn";
     private FragmentAccountBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,16 +67,45 @@ public class AccountFragment extends Fragment {
         });
         logoutBtn.setOnClickListener(button -> {
 
-            LoginFragment loginFragment = (LoginFragment) getParentFragmentManager().findFragmentById(R.id.mobile_navigation);
-            if (loginFragment != null) {
-                loginFragment.clearLoginState();
-            } else {
-                Log.e(TAG, "Y IT NO WORK");
-            }
+//            // Clear login state
+//            clearLoginState();
+//
+//            // Navigate to the login fragment
+//            NavDirections action = AccountFragmentDirections.actionNavigationAccountToLoginFragment();
+//            Navigation.findNavController(requireView()).navigate(action);
+//
+//            // Remove the previous fragment from the back stack
+//            Navigation.findNavController(requireView()).popBackStack();
+//
+//
+//            Intent intent = getActivity().getIntent();
+//            getActivity().finish();
+//            startActivity(intent);
 
-            NavDirections action = AccountFragmentDirections.actionNavigationAccountToLoginFragment();
-            Navigation.findNavController(requireView()).navigate(action);
+
+
+            // Clear login state
+            clearLoginState();
+
+            // Navigate to the splash activity
+            Intent splashIntent = new Intent(requireContext(), SplashActivity.class);
+            splashIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(splashIntent);
+
+            // Finish the current activity
+            requireActivity().finish();
+
         });
+    }
+
+    private void clearLoginState() {
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //clearing data and making flag false
+        editor.clear();
+        editor.putBoolean(IS_LOGGED_IN, false);
+        editor.apply();
     }
 
     @Override

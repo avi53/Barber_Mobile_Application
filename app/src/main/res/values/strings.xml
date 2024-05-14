@@ -29,6 +29,10 @@
     <string name="pwd_check_hint_register">Re-Type your password</string>
     <string name="phone_num_hint_register">Enter your phone number</string>
     <string name="want_to_register_text">Click here to Register</string>
+    <string name="logout">Logout</string>
+    <string name="add_card_details">Add Card Details</string>
+    <string name="edit_information">Edit Information</string>
+    <string name="phone_number">Phone Number</string>
 
 
 </resources>

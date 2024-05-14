@@ -10,6 +10,12 @@ public class Account {
     private String mPassword;
     private int mPhoneNumber;
 
+
+    public final static String EMAIL = "Email";
+    public final static String FIRST_NAME = "FirstName";
+    public final static String LAST_NAME = "LastName";
+    public final static String PHONE_NUMBER = "PhoneNumber";
+
     /**
      * Email validation pattern.
      */
@@ -31,6 +37,13 @@ public class Account {
         setFirstName(theFirstName);
         setLastName(theLastName);
         setPassword(thePassword);
+        setPhoneNumber(thePhoneNumber);
+    }
+
+    public Account (String theFirstName, String theLastName, String theEmail, int thePhoneNumber) {
+        setFirstName(theFirstName);
+        setLastName(theLastName);
+        setEmail(theEmail);
         setPhoneNumber(thePhoneNumber);
     }
 

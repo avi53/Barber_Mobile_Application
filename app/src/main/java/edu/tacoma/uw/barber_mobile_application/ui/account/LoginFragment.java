@@ -35,6 +35,7 @@ public class LoginFragment extends Fragment {
     // Define a constant for your SharedPreferences key
     private static final String SHARED_PREFS = "sharedPrefs";
     private static final String IS_LOGGED_IN = "isLoggedIn";
+    public static final String USER_EMAIL_KEY = "user_email";
 
     private FragmentLoginBinding mBinding;
     private UserViewModel mUserViewModel;
@@ -120,6 +121,7 @@ public class LoginFragment extends Fragment {
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(IS_LOGGED_IN, true);
+        editor.putString(USER_EMAIL_KEY, email);
         editor.apply();
 
     }
@@ -131,13 +133,11 @@ public class LoginFragment extends Fragment {
                 try {
                     err = "Error Authenticating User: " + response.get("error");
                     mBinding.textErrorLogin.setText(err);
-//                    Navigation.findNavController(getView()).popBackStack();
 
                 } catch (JSONException e) {
                     err = "JSON Parse Error" + e.getMessage();
                     Log.e("JSON Parse Error", err);
                     mBinding.textErrorLogin.setText(err);
-//                    Navigation.findNavController(getView()).popBackStack();
 
                 }
             } else if (response.has("result")) {
@@ -149,8 +149,6 @@ public class LoginFragment extends Fragment {
                     } else {
                         Log.e(TAG, response.toString());
                         mBinding.textErrorLogin.setText(response.getString("result"));
-//                        Navigation.findNavController(getView()).popBackStack();
-                        return;
                     }
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
@@ -160,18 +158,5 @@ public class LoginFragment extends Fragment {
             Log.d("JSON Response", "No Response");
         }
     }
-
-    // Define a method to clear the login state
-    public void clearLoginState() {
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        //clearing data and making flag false
-        editor.clear();
-        editor.putBoolean(IS_LOGGED_IN, false);
-        editor.apply();
-
-    }
-
-
 
 }

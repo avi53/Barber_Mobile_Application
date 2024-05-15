@@ -1,5 +1,6 @@
 package edu.tacoma.uw.barber_mobile_application;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.os.Handler;
 
+import java.util.Objects;
+
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -23,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

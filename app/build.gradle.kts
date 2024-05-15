@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -32,7 +33,8 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("org.mindrot:jbcrypt:0.4")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -45,6 +47,10 @@ dependencies {
     implementation (libs.play.services.maps)
     implementation(libs.recyclerview)
     testImplementation(libs.junit)
+    androidTestImplementation ("androidx.test:runner:1.4.0")
+    androidTestImplementation ("androidx.test:rules:1.4.0")
+    androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.4.0")
+    androidTestImplementation("junit:junit:4.12")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

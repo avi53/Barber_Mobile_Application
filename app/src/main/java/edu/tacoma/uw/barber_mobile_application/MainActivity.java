@@ -15,13 +15,11 @@ import edu.tacoma.uw.barber_mobile_application.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        edu.tacoma.uw.barber_mobile_application.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -37,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         // Observe the current destination of the NavController
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             // Check if the current destination is the LoginFragment
-            // TODO: Add "|| destination.getId() == R.id.registrationFragment" in if block when time comes
-            if (destination.getId() == R.id.loginFragment) {
+            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
                 // Hide the BottomNavigationView
                 navView.setVisibility(View.GONE);
             } else {

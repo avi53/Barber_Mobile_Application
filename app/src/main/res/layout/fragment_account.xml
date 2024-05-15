@@ -41,7 +41,6 @@
                 android:background="?attr/editTextBackground"
                 android:ems="15"
                 android:gravity="center_vertical"
-                android:text="First Name"
                 android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:textColor="@color/white" />
 
@@ -52,7 +51,6 @@
                 android:background="?attr/editTextBackground"
                 android:ems="15"
                 android:gravity="center_vertical"
-                android:text="Last Name"
                 android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:textColor="@color/white" />
 
@@ -63,7 +61,6 @@
                 android:background="?attr/editTextBackground"
                 android:ems="15"
                 android:gravity="center_vertical"
-                android:text="Email"
                 android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:textColor="@color/white" />
 
@@ -75,7 +72,6 @@
                 android:ems="15"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="20dp"
-                android:text="@string/phone_number"
                 android:textAppearance="?android:attr/textAppearanceMediumInverse"
                 android:textColor="@color/white" />
 

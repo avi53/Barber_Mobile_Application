@@ -1,27 +1,43 @@
 <resources>
+
     <string name="app_name">The Empire Barbershop</string>
+
+    <!-- Navigation Bar Fragment Titles -->
     <string name="title_services">Services</string>
     <string name="title_portfolio">Portfolio</string>
     <string name="title_details">Shop Details</string>
     <string name="title_account">Account</string>
-    <string name="MAPS_API_KEY">PLACEHOLDER</string>
+
+
+    <!-- Details Fragment -->
     <string name="title_instagram">Instagram</string>
     <string name="title_facebook">Facebook</string>
     <string name="policy"><u>Payment and Cancellation Policy</u></string>
     <string name="about_section"><u>About The Developers of this App</u></string>
+    <!-- Google Maps API Key -->
+    <string name="MAPS_API_KEY">PLACEHOLDER</string>
 
+
+    <!-- Services Fragment -->
     <string name="Haircut50">$50 - Haircut</string>
     <string name="Haircut25">$25 - Beard</string>
     <string name="Haircut35">$35 - Taper</string>
     <string name="Haircut20">$20 - Lineup</string>
     <string name="Haircut40">$40 - Child</string>
     <string name="Haircut15">$15 - Senior</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Login Fragment -->
     <string name="email_hint">Enter your email</string>
     <string name="pwd_hint">Enter your password</string>
     <string name="register_text">Register</string>
     <string name="login_text">Login</string>
+    <!-- Login Fragment - Login Errors -->
+    <string name="enter_valid_email_login">Please Enter a Valid Email to Login</string>
+    <string name="enter_valid_password_login">Please Enter a Correct and Valid Password for the Account</string>
+
+
+    <!-- Registration Fragment -->
     <string name="first_name_hint_register">Enter your First Name</string>
     <string name="last_name_hint_register">Enter your Last Name</string>
     <string name="email_hint_register">Enter your Email</string>
@@ -29,10 +45,17 @@
     <string name="pwd_check_hint_register">Re-Type your password</string>
     <string name="phone_num_hint_register">Enter your phone number</string>
     <string name="want_to_register_text">Click here to Register</string>
+    <!-- Registration Fragment - Registration Errors -->
+    <string name="enter_first_name_register">Please Enter Your First Name to Register</string>
+    <string name="enter_last_name_register">Please Enter Your Last Name to Register</string>
+    <string name="enter_valid_email_register">Please Enter a Valid Email to Register</string>
+    <string name="enter_password_register">Please Enter a Password to Register</string>
+    <string name="enter_phone_number_register">Please Enter a Phone Number to Register</string>
+
+
+    <!-- Account Fragment -->
     <string name="logout">Logout</string>
     <string name="add_card_details">Add Card Details</string>
     <string name="edit_information">Edit Information</string>
-    <string name="phone_number">Phone Number</string>
-
 
 </resources>

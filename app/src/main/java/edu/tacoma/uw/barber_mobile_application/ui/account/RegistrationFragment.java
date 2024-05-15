@@ -19,7 +19,8 @@ import android.view.ViewGroup;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.Objects;
 
 import edu.tacoma.uw.barber_mobile_application.Account;
 import edu.tacoma.uw.barber_mobile_application.R;
@@ -27,21 +28,42 @@ import edu.tacoma.uw.barber_mobile_application.UserViewModel;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentRegistrationBinding;
 
 /**
- * A simple {@link Fragment} subclass.
+ * This fragment is responsible for the "Registration" section, which is the fragment
+ * a user sees when they don't have an account to login with. They will redirect to this
+ * page from the login fragment and will allow a user to enter their information that
+ * will allow them to sign up and sign into the application.
+ * This fragment includes functionality for user registration, validation of user inputs,
+ * and handling responses from the registration process.
+ *
+ * @author Hassan Bassam Farhat
+ * @version Spring 2024
  */
 public class RegistrationFragment extends Fragment {
 
+    // Class variable(s) attributes
     private FragmentRegistrationBinding mBinding;
     private UserViewModel mUserViewModel;
 
+
+    // Public Class Methods
+
+    /**
+     * Inflates the layout for this fragment, initializes ViewModel, and returns the root view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     * @return The root view of the fragment.
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mUserViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
+        mUserViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         mBinding = FragmentRegistrationBinding.inflate(inflater, container, false);
 
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        // Hides Navigation bar from appearing when user is not logged in
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
@@ -49,29 +71,47 @@ public class RegistrationFragment extends Fragment {
         return mBinding.getRoot();
     }
 
+    /**
+     * Handles the initialization of UI components, setting up click listeners,
+     * and adding observers for response handling.
+     *
+     * @param view The root view of the fragment.
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mUserViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
-            observeResponse(response);
-        });
+    public void onViewCreated(@NonNull View view,
+                              @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
 
+        super.onViewCreated(view, savedInstanceState);
+
+        mUserViewModel.addResponseObserver(getViewLifecycleOwner(), this::observeResponse);
+        // Will try to register a user so long as all information provided is validated
         mBinding.registerButton.setOnClickListener(button -> register());
 
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        // Hides Navigation bar from appearing when user is not logged in
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
-
     }
 
+    /**
+     * Releases the binding when the fragment's view is destroyed.
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mBinding = null;
     }
 
+
     // Helper Functions
+
+    /**
+     * Takes all the given information that a user provides to create an account, and if that
+     * information is sufficient, then the user's data will be registered within our DB. Will
+     * also yield custom Error Messages to the user if something is incorrect.
+     */
     private void register() {
         String email = String.valueOf(mBinding.emailEditRegister.getText());
         String firstName = String.valueOf(mBinding.firstNameEditRegister.getText());
@@ -79,8 +119,9 @@ public class RegistrationFragment extends Fragment {
         String password = String.valueOf(mBinding.pwdEditRegister.getText());
         String password2 = String.valueOf(mBinding.pwdCheckEditRegister.getText());
         int phoneNumber = 0;
-        Account account = null;
+        Account account;
 
+        // Checks to see if both passwords entered are the same for DB submission
         if (!password.equals(password2)) {
             String err = "The Password Entered Doesn't Match.";
             mBinding.textErrorRegistration.setText(err);
@@ -91,28 +132,37 @@ public class RegistrationFragment extends Fragment {
             phoneNumber = Integer.parseInt(mBinding.phoneNumEditRegister.getText().toString());
             account = new Account(email, firstName, lastName, password, phoneNumber);
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, Objects.requireNonNull(e.getMessage()));
             if (firstName.isEmpty()) {
-                mBinding.textErrorRegistration.setText("Please Enter Your First Name to Register");
+                mBinding.textErrorRegistration.setText(
+                        getString(R.string.enter_first_name_register));
             } else if (lastName.isEmpty()) {
-                mBinding.textErrorRegistration.setText("Please Enter Your Last Name to Register");
+                mBinding.textErrorRegistration.setText(
+                        getString(R.string.enter_last_name_register));
             } else if (email.isEmpty()) {
-                mBinding.textErrorRegistration.setText("Please Enter a Valid Email to Register");
+                mBinding.textErrorRegistration.setText(
+                        getString(R.string.enter_valid_email_register));
             } else if (password.isEmpty()) {
-                mBinding.textErrorRegistration.setText("Please Enter a Password to Register");
-            } else if (password2.isEmpty()) {
-                mBinding.textErrorRegistration.setText("Please Re-Enter the Password to Register");
+                mBinding.textErrorRegistration.setText(
+                        getString(R.string.enter_password_register));
             } else if (phoneNumber == 0) {
-                mBinding.textErrorRegistration.setText("Please Enter a Phone Number to Register");
+                mBinding.textErrorRegistration.setText(
+                        getString(R.string.enter_phone_number_register));
             } else {
                 mBinding.textErrorRegistration.setText(e.getMessage());
             }
             return;
         }
-        Log.i(TAG, email);
         mUserViewModel.addClient(account);
     }
 
+    /**
+     *  Responsible for displaying an error if addition of a user in the DB cannot occur
+     *  due to some Error. Otherwise, if successful we want to redirect a user to the
+     *  login page of the application.
+     *
+     *  @param response The JSON response received from the server.
+     */
     private void observeResponse(final JSONObject response) {
         if (response.length() > 0) {
             if (response.has("error")) {
@@ -131,6 +181,5 @@ public class RegistrationFragment extends Fragment {
             Log.d("JSON Response", "No Response");
         }
     }
-
 
 }

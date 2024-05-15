@@ -22,9 +22,7 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-import edu.tacoma.uw.barber_mobile_application.Account;
 import edu.tacoma.uw.barber_mobile_application.R;
-import edu.tacoma.uw.barber_mobile_application.UserViewModel;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentRegistrationBinding;
 
 /**

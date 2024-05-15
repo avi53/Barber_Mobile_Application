@@ -1,4 +1,4 @@
-package edu.tacoma.uw.barber_mobile_application;
+package edu.tacoma.uw.barber_mobile_application.ui.account;
 
 import static android.content.ContentValues.TAG;
 
@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
+
+import edu.tacoma.uw.barber_mobile_application.ui.account.Account;
 
 /**
  * ViewModel class that provides data to the UI and handles user interactions.
@@ -101,7 +103,7 @@ public class UserViewModel extends AndroidViewModel {
                 mResponse::setValue,
                 this::handleError);
 
-        Log.i("edu.tacoma.uw.barber_mobile_application.UserViewModel", request.getUrl());
+        Log.i("edu.tacoma.uw.barber_mobile_application.ui.account.UserViewModel", request.getUrl());
         request.setRetryPolicy(new DefaultRetryPolicy(
                 10_000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

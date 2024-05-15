@@ -1,4 +1,4 @@
-package edu.tacoma.uw.barber_mobile_application;
+package edu.tacoma.uw.barber_mobile_application.ui.account;
 
 import java.util.regex.Pattern;
 

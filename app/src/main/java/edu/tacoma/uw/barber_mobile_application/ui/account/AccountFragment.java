@@ -16,10 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.tacoma.uw.barber_mobile_application.Account;
 import edu.tacoma.uw.barber_mobile_application.R;
 import edu.tacoma.uw.barber_mobile_application.SplashActivity;
-import edu.tacoma.uw.barber_mobile_application.UserViewModel;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentAccountBinding;
 
 /**

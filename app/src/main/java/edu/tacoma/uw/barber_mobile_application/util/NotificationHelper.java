@@ -1,4 +1,4 @@
-package edu.tacoma.uw.barber_mobile_application.helper;
+package edu.tacoma.uw.barber_mobile_application.util;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

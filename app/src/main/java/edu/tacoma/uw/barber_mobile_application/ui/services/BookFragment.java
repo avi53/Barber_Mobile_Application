@@ -70,11 +70,31 @@ public class BookFragment extends Fragment {
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitBookingToServer();
+                String email = "test@test.com";
+                String date = "2024-5-21";
+                String time = "16:00:00";
+                String type = "Haircut";
+                boolean beard = false;
+                boolean towel = false;
+
+                String[] parts = time.split(":");
+                int hour = Integer.parseInt(parts[0]);
+
+                // Subtract 9 to get the hour starting from 0 at 9 AM
+                String noon = "PM";
+                int singleDigitHour = hour - 12;
+                if (singleDigitHour < 1) {
+                    singleDigitHour += 12;
+                    noon = "AM";
+                }
+                String formatTime = singleDigitHour + " " + noon;
+
+                submitBookingToServer(email, date, time, type, beard, towel);
 
                 Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "Notifcation");
-                NotificationHelper.displayNotification(getContext(), "Booking Confirmed", "Your booking has been confirmed.");
+                String output = String.format("Your booking on %s, at %s been confirmed.", date, formatTime);
+                NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
             }
         });
 
@@ -83,17 +103,17 @@ public class BookFragment extends Fragment {
     }
 
 
-    private void submitBookingToServer() {
+    private void submitBookingToServer(String email, String date, String time, String type, boolean beard, boolean towel) {
         // Create a JSON object with the booking details
         JSONObject jsonObject = new JSONObject();
         try {
             // Populate the JSON object with booking details
-            jsonObject.put("email", "user@example.com");
-            jsonObject.put("date", "2024-05-20");
-            jsonObject.put("time", "14:30:00");
-            jsonObject.put("booking_type", "Haircut");
-            jsonObject.put("beard", false);
-            jsonObject.put("hot_towel", true);
+            jsonObject.put("email", email);
+            jsonObject.put("date", date);
+            jsonObject.put("time", time);
+            jsonObject.put("booking_type", type);
+            jsonObject.put("beard", beard);
+            jsonObject.put("hot_towel", towel);
         } catch (JSONException e) {
             e.printStackTrace();
         }

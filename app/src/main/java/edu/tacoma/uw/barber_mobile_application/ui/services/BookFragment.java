@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import edu.tacoma.uw.barber_mobile_application.R;
+import edu.tacoma.uw.barber_mobile_application.helper.NotificationHelper;
 
 /**
  * create an instance of this fragment.
@@ -48,6 +50,9 @@ public class BookFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
+        // Create the notification channel
+        NotificationHelper.createNotificationChannel(getContext());
+
         // Find the button in your layout
         Button bookButton = view.findViewById(R.id.bookButton);
 
@@ -56,6 +61,8 @@ public class BookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "Notifcation");
+                NotificationHelper.displayNotification(getContext(), "Booking Confirmed", "Your booking has been confirmed.");
             }
         });
 

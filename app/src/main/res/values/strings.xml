@@ -57,5 +57,7 @@
     <string name="logout">Logout</string>
     <string name="add_card_details">Add Card Details</string>
     <string name="edit_information">Edit Information</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

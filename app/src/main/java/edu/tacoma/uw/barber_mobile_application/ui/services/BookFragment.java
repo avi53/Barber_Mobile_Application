@@ -1,5 +1,7 @@
 package edu.tacoma.uw.barber_mobile_application.ui.services;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,11 +17,14 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
 import com.android.volley.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -65,6 +70,7 @@ public class BookFragment extends Fragment {
 
         // Find the button in your layout
         Button bookButton = view.findViewById(R.id.bookButton);
+        Button getBookingsButton = view.findViewById(R.id.getBookingsButton);
 
         // Set click listener for the button
         bookButton.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +101,14 @@ public class BookFragment extends Fragment {
                 Log.d("TAG", "Notifcation");
                 String output = String.format("Your booking on %s, at %s been confirmed.", date, formatTime);
                 NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
+            }
+        });
+
+        // Set click listener for the get bookings button
+        getBookingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fetchAllBookings();
             }
         });
 
@@ -176,5 +190,67 @@ public class BookFragment extends Fragment {
                 }
             }
         }).start(); // Start the thread
+    }
+
+    private void fetchAllBookings() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection urlConnection = null;
+                try {
+                    URL url = new URL("https://students.washington.edu/tratsko/get_bookings.php");
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestMethod("GET");
+
+                    int responseCode = urlConnection.getResponseCode();
+
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+
+                        in.close();
+
+                        Log.d(TAG, response.toString());
+
+                        // Parse JSON and log the bookings
+                        parseAndLogBookings(response.toString());
+                    } else {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(), "Failed to retrieve bookings", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private void parseAndLogBookings(String jsonResponse) throws JSONException {
+        JSONObject jsonObject = new JSONObject(jsonResponse);
+        JSONArray bookingsArray = jsonObject.getJSONArray("bookings");
+
+        for (int i = 0; i < bookingsArray.length(); i++) {
+            JSONObject booking = bookingsArray.getJSONObject(i);
+            Log.d(TAG, "Booking ID: " + booking.getInt("id"));
+            Log.d(TAG, "User Email: " + booking.getString("user_email"));
+            Log.d(TAG, "Date: " + booking.getString("booking_date"));
+            Log.d(TAG, "Time: " + booking.getString("booking_time"));
+            Log.d(TAG, "Type: " + booking.getString("booking_type"));
+            Log.d(TAG, "Beard: " + booking.getBoolean("beard"));
+            Log.d(TAG, "Hot Towel: " + booking.getBoolean("hot_towel"));
+        }
     }
 }

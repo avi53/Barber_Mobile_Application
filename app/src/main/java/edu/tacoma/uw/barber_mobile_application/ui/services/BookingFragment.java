@@ -186,6 +186,7 @@ public class BookingFragment extends Fragment {
             Log.d(TAG, "Hot Towel: " + booking.getString("hot_towel"));
 
             bookingDay = DateTime.formatDate(bookingDay);
+            bookingTime = DateTime.formatTime(bookingTime);
 
             String message = "On " + bookingDay + " at "
                     + bookingTime + ". There is a " + bookingType + " scheduled.\n";

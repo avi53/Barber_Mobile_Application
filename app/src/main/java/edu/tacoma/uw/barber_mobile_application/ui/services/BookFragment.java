@@ -2,20 +2,26 @@ package edu.tacoma.uw.barber_mobile_application.ui.services;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,8 +41,14 @@ import edu.tacoma.uw.barber_mobile_application.util.NotificationHelper;
  * create an instance of this fragment.
  */
 public class BookFragment extends Fragment {
+
+    // Constant(s) definitions for SharedPreference accessibility
+    private static final String SHARED_PREFS = "sharedPrefs";
+    private static final String IS_LOGGED_IN = "isLoggedIn";
+    public static final String USER_EMAIL_KEY = "user_email";
+
     public BookFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -52,6 +64,9 @@ public class BookFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences =
+        requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString(USER_EMAIL_KEY, "");
     }
 
     @Override
@@ -71,36 +86,58 @@ public class BookFragment extends Fragment {
         // Find the button in your layout
         Button bookButton = view.findViewById(R.id.bookButton);
         Button getBookingsButton = view.findViewById(R.id.getBookingsButton);
+        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        final EditText[] editTextTime = {view.findViewById(R.id.editTextTime)};
+
+        final String[] selectedDate = {""};
+
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                // Note: month is 0-based, so add 1
+                selectedDate[0] = year + "-" + (month + 1) + "-" + dayOfMonth;
+            }
+        });
 
         // Set click listener for the button
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = "test@test.com";
-                String date = "2024-5-21";
-                String time = "16:00:00";
+                String date = selectedDate[0];
+                //String time = "16:00:00";
+                String time = editTextTime[0].getText().toString();
                 String type = "Haircut";
                 boolean beard = false;
                 boolean towel = false;
+
+                if (date.isEmpty() || time.isEmpty()) {
+                    Toast.makeText(getContext(), "Please select a date and time.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 String[] parts = time.split(":");
                 int hour = Integer.parseInt(parts[0]);
 
                 // Subtract 9 to get the hour starting from 0 at 9 AM
-                String noon = "PM";
+                String noon = "AM";
                 int singleDigitHour = hour - 12;
                 if (singleDigitHour < 1) {
                     singleDigitHour += 12;
-                    noon = "AM";
+                    noon = "PM";
                 }
                 String formatTime = singleDigitHour + " " + noon;
 
                 submitBookingToServer(email, date, time, type, beard, towel);
 
-                Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "Notifcation");
                 String output = String.format("Your booking on %s, at %s been confirmed.", date, formatTime);
                 NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
+
+                // Display Snackbar notification
+                Snackbar.make(view, output, Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -168,7 +205,7 @@ public class BookFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getContext(), "Booking successful!", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(), "Booking successful!", Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {

@@ -24,7 +24,7 @@
     <string name="Haircut35">$35 - Taper</string>
     <string name="Haircut20">$20 - Lineup</string>
     <string name="Haircut40">$40 - Child</string>
-    <string name="Haircut15">$15 - Senior</string>
+    <string name="bookings">Current Bookings</string>
 
 
     <!-- Login Fragment -->

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_services_to_optionsFragment"
             app:destination="@id/optionsFragment" />
+        <action
+            android:id="@+id/action_navigation_services_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
     </fragment>
 
     <fragment
@@ -72,4 +75,9 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="edu.tacoma.uw.barber_mobile_application.ui.account.RegistrationFragment" />
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="edu.tacoma.uw.barber_mobile_application.ui.services.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" />
 </navigation>

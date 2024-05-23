@@ -27,40 +27,40 @@ public class ServicesFragment extends Fragment {
 
 
         // Set onClickListeners for buttons
-        binding.button1.setOnClickListener(new View.OnClickListener() {
+        binding.haircut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToOptionsFragment();
             }
         });
-        binding.button2.setOnClickListener(new View.OnClickListener() {
+        binding.beard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToOptionsFragment();
             }
         });
-        binding.button3.setOnClickListener(new View.OnClickListener() {
+        binding.taper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToOptionsFragment();
             }
         });
-        binding.button4.setOnClickListener(new View.OnClickListener() {
+        binding.lineup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToOptionsFragment();
             }
         });
-        binding.button5.setOnClickListener(new View.OnClickListener() {
+        binding.child.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToOptionsFragment();
             }
         });
-        binding.button6.setOnClickListener(new View.OnClickListener() {
+        binding.bookings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOptionsFragment();
+                navigateToBookingFragment();
             }
         });
 
@@ -71,6 +71,11 @@ public class ServicesFragment extends Fragment {
     private void navigateToOptionsFragment() {
         NavHostFragment.findNavController(this)
                 .navigate(R.id.action_navigation_services_to_optionsFragment);
+    }
+
+    private void navigateToBookingFragment() {
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_navigation_services_to_bookingFragment);
     }
 
     @Override

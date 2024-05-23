@@ -9,7 +9,7 @@ public class DateTime {
 
     public static String formatDate(String dateString) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM d'-'", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM d", Locale.getDefault());
 
         try {
             Date date = inputFormat.parse(dateString);

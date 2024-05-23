@@ -30,31 +30,31 @@ public class ServicesFragment extends Fragment {
         binding.haircut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOptionsFragment();
+                navigateToOptionsFragment("Haircut");
             }
         });
         binding.beard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOptionsFragment();
+                navigateToOptionsFragment("Beard Trim");
             }
         });
         binding.taper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOptionsFragment();
+                navigateToOptionsFragment("Taper");
             }
         });
         binding.lineup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOptionsFragment();
+                navigateToOptionsFragment("Lineup");
             }
         });
         binding.child.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOptionsFragment();
+                navigateToOptionsFragment("Children Haircut");
             }
         });
         binding.bookings.setOnClickListener(new View.OnClickListener() {
@@ -68,9 +68,11 @@ public class ServicesFragment extends Fragment {
         return root;
     }
 
-    private void navigateToOptionsFragment() {
+    private void navigateToOptionsFragment(String serviceType) {
+        Bundle bundle = new Bundle();
+        bundle.putString("service_type", serviceType);
         NavHostFragment.findNavController(this)
-                .navigate(R.id.action_navigation_services_to_optionsFragment);
+                .navigate(R.id.action_navigation_services_to_optionsFragment, bundle);
     }
 
     private void navigateToBookingFragment() {

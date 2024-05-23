@@ -13,14 +13,10 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -44,29 +40,16 @@ public class BookFragment extends Fragment {
 
     // Constant(s) definitions for SharedPreference accessibility
     private static final String SHARED_PREFS = "sharedPrefs";
-    private static final String IS_LOGGED_IN = "isLoggedIn";
-    public static final String USER_EMAIL_KEY = "user_email";
+
+    private String serviceType;
 
     public BookFragment() {
 
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     * @return A new instance of fragment BookFragment.
-     */
-    public static BookFragment newInstance(String param1, String param2) {
-        BookFragment fragment = new BookFragment();
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences =
-        requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        String email = sharedPreferences.getString(USER_EMAIL_KEY, "");
     }
 
     @Override
@@ -75,7 +58,10 @@ public class BookFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_book, container, false);
 
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        assert getArguments() != null;
+        serviceType = getArguments().getString("service_type");
+
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
@@ -92,53 +78,53 @@ public class BookFragment extends Fragment {
         final String[] selectedDate = {""};
 
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                // Note: month is 0-based, so add 1
-                selectedDate[0] = year + "-" + (month + 1) + "-" + dayOfMonth;
-            }
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
+            // Note: month is 0-based, so add 1
+            selectedDate[0] = year + "-" + (month + 1) + "-" + dayOfMonth;
         });
 
         // Set click listener for the button
-        bookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = "test@test.com";
-                String date = selectedDate[0];
-                //String time = "16:00:00";
-                String time = editTextTime[0].getText().toString();
-                String type = "Haircut";
-                boolean beard = false;
-                boolean towel = false;
+        bookButton.setOnClickListener(v -> {
+            String email = "test@test.com";
+            String date = selectedDate[0];
+            //String time = "16:00:00";
+            String time = editTextTime[0].getText().toString();
+//                String type = "Haircut";
+            String type = serviceType;
+            boolean beard = false;
+            boolean towel = false;
 
-                if (date.isEmpty() || time.isEmpty()) {
-                    Toast.makeText(getContext(), "Please select a date and time.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                String[] parts = time.split(":");
-                int hour = Integer.parseInt(parts[0]);
-
-                // Subtract 9 to get the hour starting from 0 at 9 AM
-                String noon = "AM";
-                int singleDigitHour = hour - 12;
-                if (singleDigitHour < 1) {
-                    singleDigitHour += 12;
-                    noon = "PM";
-                }
-                String formatTime = singleDigitHour + " " + noon;
-
-                submitBookingToServer(email, date, time, type, beard, towel);
-
-                //Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
-                Log.d("TAG", "Notifcation");
-                String output = String.format("Your booking on %s, at %s been confirmed.", date, formatTime);
-                NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
-
-                // Display Snackbar notification
-                Snackbar.make(view, output, Snackbar.LENGTH_LONG).show();
+            if (date.isEmpty() || time.isEmpty()) {
+                Toast.makeText(getContext(), "Please select a date and time.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            String[] parts = time.split(":");
+            int hour = Integer.parseInt(parts[0]);
+
+            if (hour < 9 && hour > 5 || hour > 12) {
+                Toast.makeText(getContext(), "Please select a valid time.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Subtract 9 to get the hour starting from 0 at 9 AM
+            String noon = "AM";
+            int singleDigitHour = hour - 12;
+            if (singleDigitHour < 1) {
+                singleDigitHour += 12;
+                noon = "PM";
+            }
+            String formatTime = singleDigitHour + " " + noon;
+
+            submitBookingToServer(email, date, time, type, beard, towel);
+
+            //Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
+            Log.d("TAG", "Notification");
+            String output = String.format("Your booking on %s, at %s been confirmed.", date, formatTime);
+            NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
+
+            // Display Snackbar notification
+            Snackbar.make(view, output, Snackbar.LENGTH_LONG).show();
         });
 
         // Set click listener for the get bookings button

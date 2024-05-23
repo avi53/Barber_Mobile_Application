@@ -1,5 +1,9 @@
 package edu.tacoma.uw.barber_mobile_application.util;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,9 +17,11 @@ public class DateTime {
 
         try {
             Date date = inputFormat.parse(dateString);
+            assert date != null;
             return outputFormat.format(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
+            //e.printStackTrace();
             return dateString; // Return original string if parsing fails
         }
     }

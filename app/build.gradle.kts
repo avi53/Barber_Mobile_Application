@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation (libs.play.services.maps)
     implementation(libs.recyclerview)
+    implementation ("com.paypal.checkout:android-sdk:1.3.2")
     testImplementation(libs.junit)
     androidTestImplementation ("androidx.test:runner:1.4.0")
     androidTestImplementation ("androidx.test:rules:1.4.0")

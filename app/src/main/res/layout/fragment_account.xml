@@ -82,13 +82,16 @@
                 android:text="@string/edit_information"
                 android:textColor="@color/black"/>
 
-            <Button
-                android:id="@+id/card_details_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_card_details"
-                android:layout_marginBottom="145dp"
-                android:textColor="@color/black"/>
+            <com.paypal.checkout.paymentbutton.PaymentButtonContainer
+                android:id="@+id/payment_container_btn"
+                android:layout_width="180dp"
+                android:layout_height="41dp"
+                android:layout_marginBottom="43dp"
+                app:paypal_button_color="gold"
+                app:paypal_button_label="paypal"
+                app:paypal_button_shape="rounded"
+                app:paypal_button_size="medium"
+                app:paypal_button_enabled="true"/>
 
             <Button
                 android:id="@+id/logout_btn"

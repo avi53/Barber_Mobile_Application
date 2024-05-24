@@ -15,7 +15,7 @@
     <string name="policy"><u>Payment and Cancellation Policy</u></string>
     <string name="about_section"><u>About The Developers of this App</u></string>
     <!-- Google Maps API Key -->
-    <string name="MAPS_API_KEY">PLACEHOLDER</string>
+    <string name="MAPS_API_KEY">AIzaSyBvENVXmqiJ62y0Pkmv3ynWjham9SGO2hM</string>
 
 
     <!-- Services Fragment -->

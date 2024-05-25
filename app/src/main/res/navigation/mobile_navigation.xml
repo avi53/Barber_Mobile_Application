@@ -81,6 +81,6 @@
     <fragment
         android:id="@+id/bookingFragment"
         android:name="edu.tacoma.uw.barber_mobile_application.ui.services.BookingFragment"
-        android:label="fragment_booking"
+        android:label="Bookings"
         tools:layout="@layout/fragment_booking" />
 </navigation>

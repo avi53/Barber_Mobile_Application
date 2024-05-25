@@ -7,7 +7,7 @@
     tools:context=".ui.services.ServicesFragment">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/haircut"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@color/MainGold"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.08" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/beard"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@color/MainGold"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/taper"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@color/MainGold"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.41" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/lineup"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@color/MainGold"
@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.58" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/child"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@color/MainGold"
@@ -82,11 +82,11 @@
         app:layout_constraintVertical_bias="0.75" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/bookings"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@color/MainGold"
-        android:text="@string/Haircut15"
+        android:text="@string/bookings"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

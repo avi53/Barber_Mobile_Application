@@ -11,34 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import java.util.Objects;
-
 import edu.tacoma.uw.barber_mobile_application.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link OptionsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Options fragment to select options for a haircut. Currently nonfunctional.
  */
 public class OptionsFragment extends Fragment {
 
     public OptionsFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OptionsFragment.
-     */
-    public static OptionsFragment newInstance(String param1, String param2) {
-        OptionsFragment fragment = new OptionsFragment();
-        Bundle args = new Bundle();
-        return fragment;
     }
 
     @Override
@@ -51,7 +32,10 @@ public class OptionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
 
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        assert getArguments() != null;
+        String serviceType = getArguments().getString("service_type");
+
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
@@ -60,20 +44,20 @@ public class OptionsFragment extends Fragment {
         Button submitButton = view.findViewById(R.id.submitButton);
 
         // Set click listener for the button
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToBookFragment();
-            }
-        });
+        submitButton.setOnClickListener(v -> navigateToBookFragment(serviceType));
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void navigateToBookFragment() {
-        // Navigate to the BookFragment
+    /**
+     * Passes on the service type. In the future will pass service options.
+     * @param serviceType P
+     */
+    private void navigateToBookFragment(String serviceType) {
+        Bundle bundle = new Bundle();
+        bundle.putString("service_type", serviceType);
         Navigation.findNavController(requireView())
-                .navigate(R.id.action_optionsFragment_to_bookFragment);
+                .navigate(R.id.action_optionsFragment_to_bookFragment, bundle);
     }
 }

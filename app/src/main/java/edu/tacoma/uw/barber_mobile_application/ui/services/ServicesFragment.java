@@ -13,6 +13,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import edu.tacoma.uw.barber_mobile_application.R;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentServicesBinding;
 
+/**
+ * Base fragment for the services section. Has options for creating bookings as well
+ * as an option to view the bookings that were already booked.
+ */
 public class ServicesFragment extends Fragment {
 
     private FragmentServicesBinding binding;
@@ -25,52 +29,46 @@ public class ServicesFragment extends Fragment {
         binding = FragmentServicesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
         // Set onClickListeners for buttons
-        binding.button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToOptionsFragment();
-            }
-        });
-        binding.button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToOptionsFragment();
-            }
-        });
-        binding.button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToOptionsFragment();
-            }
-        });
-        binding.button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToOptionsFragment();
-            }
-        });
-        binding.button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToOptionsFragment();
-            }
-        });
-        binding.button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToOptionsFragment();
-            }
-        });
-
+        binding.haircut.setOnClickListener(view -> navigateToOptionsFragment("Haircut"));
+        binding.beard.setOnClickListener(view -> navigateToBookFragment("Beard Trim"));
+        binding.taper.setOnClickListener(view -> navigateToOptionsFragment("Taper"));
+        binding.lineup.setOnClickListener(view -> navigateToBookFragment("Lineup"));
+        binding.child.setOnClickListener(view -> navigateToBookFragment("Children's Haircut"));
+        binding.bookings.setOnClickListener(view -> navigateToBookingFragment());
 
         return root;
     }
 
-    private void navigateToOptionsFragment() {
+    /**
+     * Navigate to the options page with the specific booking desired.
+     * @param serviceType The specific service that the client wants is passed along.
+     */
+    private void navigateToOptionsFragment(String serviceType) {
+        Bundle bundle = new Bundle();
+        bundle.putString("service_type", serviceType);
         NavHostFragment.findNavController(this)
-                .navigate(R.id.action_navigation_services_to_optionsFragment);
+                .navigate(R.id.action_navigation_services_to_optionsFragment, bundle);
+    }
+
+    /**
+     * Navigate to the book page with the specific booking desired.
+     * Bypasses options as it is not necessary for all haircut types.
+     * @param serviceType The specific service that the client wants is passed along.
+     */
+    private void navigateToBookFragment(String serviceType) {
+        Bundle bundle = new Bundle();
+        bundle.putString("service_type", serviceType);
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_navigation_services_to_bookFragment, bundle);
+    }
+
+    /**
+     * Navigate to the current bookings.
+     */
+    private void navigateToBookingFragment() {
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_navigation_services_to_bookingFragment);
     }
 
     @Override

@@ -2,6 +2,7 @@ package edu.tacoma.uw.barber_mobile_application.ui.account;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import edu.tacoma.uw.barber_mobile_application.R;
+import edu.tacoma.uw.barber_mobile_application.SplashActivity;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentRegistrationBinding;
 
 /**
@@ -173,7 +175,12 @@ public class RegistrationFragment extends Fragment {
                     mBinding.textErrorRegistration.setText(err);
                 }
             } else {
-                Navigation.findNavController(requireView()).navigate(R.id.loginFragment);
+                // Starts Custom Splash Screen before redirect back to login page
+                Intent splashIntent = new Intent(requireContext(), SplashActivity.class);
+                splashIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(splashIntent);
+
+                requireActivity().finish();
             }
         } else {
             Log.d("JSON Response", "No Response");

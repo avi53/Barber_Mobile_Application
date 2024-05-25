@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,10 +98,12 @@ public class BookFragment extends Fragment {
 
                 submitBookingToServer(email, date, time, type, beard, towel);
 
-                Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Date Booked Successfully!", Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "Notifcation");
                 String output = String.format("Your booking on %s, at %s been confirmed.", date, formatTime);
                 NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
+
+                Snackbar.make(view, output, Snackbar.LENGTH_LONG).show();
             }
         });
 

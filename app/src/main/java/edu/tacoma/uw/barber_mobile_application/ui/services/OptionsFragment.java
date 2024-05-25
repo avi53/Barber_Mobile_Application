@@ -14,7 +14,7 @@ import android.widget.Button;
 import edu.tacoma.uw.barber_mobile_application.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Options fragment to select options for a haircut. Currently nonfunctional.
  */
 public class OptionsFragment extends Fragment {
 
@@ -50,6 +50,10 @@ public class OptionsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Passes on the service type. In the future will pass service options.
+     * @param serviceType P
+     */
     private void navigateToBookFragment(String serviceType) {
         Bundle bundle = new Bundle();
         bundle.putString("service_type", serviceType);

@@ -28,14 +28,19 @@ import java.net.URL;
 import edu.tacoma.uw.barber_mobile_application.R;
 import edu.tacoma.uw.barber_mobile_application.util.DateTime;
 import edu.tacoma.uw.barber_mobile_application.util.NotificationHelper;
+import edu.tacoma.uw.barber_mobile_application.util.BookingHelper;
 
 /**
- * create an instance of this fragment.
+ * Fragment to complete the booking. Sends a request to the backend server and a notification.
  */
 public class BookFragment extends Fragment {
 
+    /** Keep track of the type of service client is booking. */
     private String serviceType;
 
+    /**
+     * Empty constructor since everything is done in the create and create view methods.
+     */
     public BookFragment() {
 
     }
@@ -99,7 +104,8 @@ public class BookFragment extends Fragment {
                 return;
             }
 
-            submitBookingToServer(email, date, time, type, beard, towel);
+            //submitBookingToServer(email, date, time, type, beard, towel);
+            BookingHelper.submitBookingToServer(email, date, time, type, beard, towel, this);
 
             String output = String.format("Your booking on %s, at %s been confirmed.", date, DateTime.formatTime(hour));
             NotificationHelper.displayNotification(getContext(), "Booking Confirmed", output);
@@ -110,70 +116,5 @@ public class BookFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
-    }
-
-
-    private void submitBookingToServer(String email, String date, String time, String type, boolean beard, boolean towel) {
-        // Create a JSON object with the booking details
-        JSONObject jsonObject = new JSONObject();
-        try {
-            // Populate the JSON object with booking details
-            jsonObject.put("email", email);
-            jsonObject.put("date", date);
-            jsonObject.put("time", time);
-            jsonObject.put("booking_type", type);
-            jsonObject.put("beard", beard);
-            jsonObject.put("hot_towel", towel);
-        } catch (JSONException e) {
-            Log.e(TAG, e.toString());
-        }
-
-        // Create a new thread to perform network operations
-        new Thread(() -> {
-            HttpURLConnection urlConnection = null;
-            try {
-                // Create URL object with the server URL
-                URL url = new URL("https://students.washington.edu/tratsko/add_a_booking.php");
-
-                // Open HttpURLConnection
-                urlConnection = (HttpURLConnection) url.openConnection();
-
-                // Set request method to POST
-                urlConnection.setRequestMethod("POST");
-
-                // Set content type for the request
-                urlConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-                // Enable output for the request
-                urlConnection.setDoOutput(true);
-
-                // Write JSON data to the output stream
-                DataOutputStream os = new DataOutputStream(urlConnection.getOutputStream());
-                os.writeBytes(jsonObject.toString());
-                os.flush();
-                os.close();
-
-                // Get response code from the server
-                int responseCode = urlConnection.getResponseCode();
-
-                // Check if request was successful (HTTP 200)
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    // Display success message in UI thread
-                    getActivity().runOnUiThread(() -> {
-//                        Toast.makeText(getContext(), "Booking successful!", Toast.LENGTH_SHORT).show();
-                    });
-                } else {
-                    // Display error message in UI thread
-                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Failed to book appointment", Toast.LENGTH_SHORT).show());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                // Disconnect HttpURLConnection
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-        }).start(); // Start the thread
     }
 }

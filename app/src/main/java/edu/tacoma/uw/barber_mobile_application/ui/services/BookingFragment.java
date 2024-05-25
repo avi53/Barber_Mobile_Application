@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -28,6 +30,10 @@ import java.net.URL;
 import edu.tacoma.uw.barber_mobile_application.R;
 import edu.tacoma.uw.barber_mobile_application.util.DateTime;
 
+/**
+ * Fragment to show the current bookings. Grabs all bookings from the server and
+ * filters for the only ones that are relevant to this user.
+ */
 public class BookingFragment extends Fragment {
 
     private TextView mBookingsTextView;
@@ -61,6 +67,11 @@ public class BookingFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_booking, container, false);
         mBookingsTextView = view.findViewById(R.id.displayBookings);
@@ -70,6 +81,9 @@ public class BookingFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Grab the bookings from the backend and then parse them and add them to the textview.
+     */
     private void fetchBookings() {
         new Thread(new Runnable() {
             @Override
@@ -94,12 +108,7 @@ public class BookingFragment extends Fragment {
                         in.close();
                         parseAndLogBookings(response.toString());
                     } else {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getContext(), "Failed to retrieve bookings", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Failed to retrieve bookings", Toast.LENGTH_SHORT).show());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -112,38 +121,11 @@ public class BookingFragment extends Fragment {
         }).start();
     }
 
-    private void parseAndDisplayBookings(String jsonResponse) {
-        try {
-            JSONObject jsonObject = new JSONObject(jsonResponse);
-            JSONArray bookingsArray = jsonObject.getJSONArray("bookings");
-
-            final StringBuilder bookingsDisplay = new StringBuilder();
-            for (int i = 0; i < bookingsArray.length(); i++) {
-                JSONObject booking = bookingsArray.getJSONObject(i);
-                bookingsDisplay.append("Booking ID: ").append(booking.getInt("id")).append("\n");
-                bookingsDisplay.append("User Email: ").append(booking.getString("user_email")).append("\n");
-                bookingsDisplay.append("Date: ").append(booking.getString("booking_date")).append("\n");
-                bookingsDisplay.append("Time: ").append(booking.getString("booking_time")).append("\n");
-                bookingsDisplay.append("Type: ").append(booking.getString("booking_type")).append("\n");
-                bookingsDisplay.append("Beard: ").append(booking.getBoolean("beard")).append("\n");
-                bookingsDisplay.append("Hot Towel: ").append(booking.getBoolean("hot_towel")).append("\n\n");
-            }
-
-            Log.e("Tag", bookingsDisplay.toString());
-
-            // Update the TextView on the UI thread
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mBookingsTextView.setText(bookingsDisplay.toString());
-                }
-            });
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Grabs all of the bookings and displays them. Also logs them.
+     * @param jsonResponse The json containing all of the bookings.
+     * @throws JSONException Throws if passed in a bad formatted json.
+     */
     private void parseAndLogBookings(String jsonResponse) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonResponse);
         JSONArray bookingsArray = jsonObject.getJSONArray("bookings");
@@ -163,19 +145,11 @@ public class BookingFragment extends Fragment {
             Log.d("Booking Email", "the email is " + email);
             Log.d("Cur Email", "The current email is " + curEmail);
 
-
-
             if (!email.equals(curEmail)) { continue; }
 
             String bookingDay = booking.getString("booking_date");
             String bookingTime = booking.getString("booking_time");
             String bookingType = booking.getString("booking_type");
-
-//            bookingsDisplay.append("Date: " + booking.getString("booking_date"));
-//            bookingsDisplay.append("Time: " + booking.getString("booking_time"));
-//            bookingsDisplay.append("Type: " + booking.getString("booking_type"));
-//            bookingsDisplay.append("Beard: " + booking.getString("beard"));
-//            bookingsDisplay.append("Hot Towel: " + booking.getString("hot_towel"));
 
             Log.d(TAG, "Booking ID: " + booking.getInt("id"));
             Log.d(TAG, "User Email: " + booking.getString("user_email"));

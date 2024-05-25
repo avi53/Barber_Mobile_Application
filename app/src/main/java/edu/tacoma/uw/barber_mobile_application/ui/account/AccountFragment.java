@@ -1,9 +1,12 @@
 package edu.tacoma.uw.barber_mobile_application.ui.account;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.volley.BuildConfig;
+import com.paypal.checkout.PayPalCheckout;
+import com.paypal.checkout.approve.Approval;
+import com.paypal.checkout.approve.OnApprove;
+import com.paypal.checkout.config.CheckoutConfig;
+import com.paypal.checkout.config.Environment;
+import com.paypal.checkout.createorder.CreateOrder;
+import com.paypal.checkout.createorder.CreateOrderActions;
+import com.paypal.checkout.createorder.CurrencyCode;
+import com.paypal.checkout.createorder.OrderIntent;
+import com.paypal.checkout.createorder.UserAction;
+import com.paypal.checkout.order.Amount;
+import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.CaptureOrderResult;
+import com.paypal.checkout.order.OnCaptureComplete;
+import com.paypal.checkout.order.OrderRequest;
+import com.paypal.checkout.order.PurchaseUnit;
+import com.paypal.checkout.paymentbutton.PaymentButtonContainer;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+import edu.tacoma.uw.barber_mobile_application.MainActivity;
 import edu.tacoma.uw.barber_mobile_application.R;
 import edu.tacoma.uw.barber_mobile_application.SplashActivity;
 import edu.tacoma.uw.barber_mobile_application.databinding.FragmentAccountBinding;
@@ -74,8 +102,8 @@ public class AccountFragment extends Fragment {
 
         // Instantiating all accessible buttons within the Account Fragment via their IDs
         Button editBtn = view.findViewById(R.id.edit_btn);
-        Button cardBtn = view.findViewById(R.id.card_details_btn);
         Button logoutBtn = view.findViewById(R.id.logout_btn);
+        PaymentButtonContainer paymentBtn = view.findViewById(R.id.payment_container_btn);
 
         // Obtaining Email from SharedPreferences to populate User Account Information
         SharedPreferences sharedPreferences =
@@ -84,16 +112,52 @@ public class AccountFragment extends Fragment {
         mModel.getAccountByEmail(email);
         mModel.observeAccountDetails(getViewLifecycleOwner(), this::updateUI);
 
+
+
+
+
+
+        paymentBtn.setup(
+                createOrderActions -> {
+                    ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
+                    purchaseUnits.add(
+                            new PurchaseUnit.Builder()
+                                    .amount(
+                                            new Amount.Builder()
+                                                    .currencyCode(CurrencyCode.USD)
+                                                    .value("10.00")
+                                                    .build()
+                                    )
+                                    .build()
+                    );
+                    OrderRequest order = new OrderRequest(
+                            OrderIntent.CAPTURE,
+                            new AppContext.Builder()
+                                    .userAction(UserAction.PAY_NOW)
+                                    .build(),
+                            purchaseUnits
+                    );
+                    createOrderActions.create(order, (CreateOrderActions.OnOrderCreated) null);
+                },
+                approval -> approval.getOrderActions().capture(new OnCaptureComplete() {
+                    @Override
+                    public void onCaptureComplete(@NotNull CaptureOrderResult result) {
+                        Log.d("AccountFragment", "CaptureOrderResult: " + result);
+                        Toast.makeText(getContext(), "Payment Successful", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+
+
+
+
+
+
+
         // TODO: Will allow a user to edit their information within the application
         editBtn.setOnClickListener(button -> {
             Toast.makeText(getContext(),
                     "Take user to edit account information", Toast.LENGTH_SHORT).show();
-        });
-
-        // TODO: Will allow a user to add their CC information thru Square API
-        cardBtn.setOnClickListener(button -> {
-            Toast.makeText(getContext(),
-                    "Add card information on Square Redirect", Toast.LENGTH_SHORT).show();
         });
 
         // When a user logs out, SharedPreference is cleared, and application is restarted
